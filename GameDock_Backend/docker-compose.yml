@@ -1,0 +1,18 @@
+services:
+  backend:
+    build:
+      context: ..
+      dockerfile: GameDock_Backend/Dockerfile
+    ports:
+      - "5000:8080"
+    container_name: gamedock-backend
+
+  frontend:
+    build:
+      context: ../../GameDock-Frontend/GameDock.Frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    container_name: gamedock-frontend
+    depends_on:
+      - backend
