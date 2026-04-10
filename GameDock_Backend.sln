@@ -2,6 +2,14 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameDock_Backend", "GameDock_Backend\GameDock_Backend.csproj", "{9A53D6C8-0426-42CF-875D-3CF35561E088}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{1584A577-164D-4E07-ACC3-2B59C454B6A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{D3CE569E-1986-42BB-AC90-F55B7090D802}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{89C49994-64FE-4050-AB0F-1E390D683104}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTO", "DTO\DTO.csproj", "{6651BBDF-8311-4F8F-8447-4A00E474C0BD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +20,21 @@ Global
 		{9A53D6C8-0426-42CF-875D-3CF35561E088}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A53D6C8-0426-42CF-875D-3CF35561E088}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A53D6C8-0426-42CF-875D-3CF35561E088}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1584A577-164D-4E07-ACC3-2B59C454B6A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1584A577-164D-4E07-ACC3-2B59C454B6A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1584A577-164D-4E07-ACC3-2B59C454B6A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1584A577-164D-4E07-ACC3-2B59C454B6A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3CE569E-1986-42BB-AC90-F55B7090D802}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3CE569E-1986-42BB-AC90-F55B7090D802}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3CE569E-1986-42BB-AC90-F55B7090D802}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3CE569E-1986-42BB-AC90-F55B7090D802}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89C49994-64FE-4050-AB0F-1E390D683104}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89C49994-64FE-4050-AB0F-1E390D683104}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89C49994-64FE-4050-AB0F-1E390D683104}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89C49994-64FE-4050-AB0F-1E390D683104}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6651BBDF-8311-4F8F-8447-4A00E474C0BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6651BBDF-8311-4F8F-8447-4A00E474C0BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6651BBDF-8311-4F8F-8447-4A00E474C0BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6651BBDF-8311-4F8F-8447-4A00E474C0BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
