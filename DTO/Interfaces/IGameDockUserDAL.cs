@@ -2,7 +2,7 @@ using DTO.Dtos;
 
 namespace DTO.Interfaces
 {
-    public interface IUserDAL
+    public interface IGameDockUserDAL
     {
         GameDockUserDto CreateUser(GameDockUserDto gameDockUser);
         GameDockUserDto ReadUser(int id);

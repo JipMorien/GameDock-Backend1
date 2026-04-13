@@ -1,7 +1,7 @@
-using DTO.Dtos;
 using Domain;
+using DTO.Dtos;
 
-namespace BLL.Mappers
+namespace Shared.Mappers
 {
     public static class PostMapper
     {

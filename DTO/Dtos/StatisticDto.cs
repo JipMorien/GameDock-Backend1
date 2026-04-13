@@ -1,4 +1,4 @@
-using Domain.Statistics;
+using DTO.Dtos.Enums;
 
 namespace DTO.Dtos
 {
@@ -6,7 +6,7 @@ namespace DTO.Dtos
     {
         public int StatisticId { get; set; }
         public int UserId { get; set; }
-        public StatisticType StatisticType { get; set; }
+        public StatisticTypeDto StatisticType { get; set; }
         public float Value { get; set; }
         public DateTime CreatedAt { get; set; }
     }
