@@ -4,11 +4,11 @@ namespace DTO.Interfaces
 {
     public interface IUserDAL
     {
-        UserDto CreateUser(UserDto user);
-        UserDto ReadUser(int id);
-        void UpdateUser(UserDto user);
+        GameDockUserDto CreateUser(GameDockUserDto gameDockUser);
+        GameDockUserDto ReadUser(int id);
+        void UpdateUser(GameDockUserDto gameDockUser);
         void DeleteUser(int id);
-        List<UserDto> GetAllUsers();
+        List<GameDockUserDto> GetAllUsers();
 
     }
 }

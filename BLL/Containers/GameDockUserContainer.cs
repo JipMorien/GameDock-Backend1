@@ -1,6 +1,6 @@
 namespace BLL.Containers;
 
-public class UserContainer
+public class GameDockUserContainer
 {
     
 }
