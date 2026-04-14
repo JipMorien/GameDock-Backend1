@@ -9,10 +9,10 @@ namespace Domain
 
         public Post(int postId, string content, DateTime createdAt, int userId)
         {
-            postId = PostId;
-            content = Content;
-            createdAt = CreatedAt;
-            userId = UserId;
+            PostId = postId;
+            Content = content;
+            CreatedAt = createdAt;
+            UserId = userId;
         }
     }
 }

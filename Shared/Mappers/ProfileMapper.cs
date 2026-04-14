@@ -16,15 +16,18 @@ namespace Shared.Mappers
                 dto.UserId);
         }
         
-        public static Profile ToProfileDto(Profile profile)
+        public static ProfileDto ToProfileDto(Profile profile)
         {
             if (profile == null) 
                 throw new ArgumentNullException(nameof(profile));
 
-            return new Profile(
-                profile.ProfileId,
-                profile.UserName,
-                profile.UserId);
+            return new ProfileDto
+            {
+                ProfileId = profile.ProfileId,
+                UserName = profile.UserName,
+                UserId = profile.UserId
+            };
+
         }
         
         

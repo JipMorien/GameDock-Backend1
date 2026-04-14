@@ -4,9 +4,9 @@ namespace DTO.Dtos
     {
         public int GameDockUserId {get; set;}
         public bool IsAdmin { get; set; }
-        public string UserName { get; set; }
-        public string Email { get; set; }
-        public string PasswordHash {get; set;}
+        public required string UserName { get; set; }
+        public required string Email { get; set; }
+        public required string PasswordHash {get; set;}
         public DateTime CreatedAt { get; set; }
     }
 }

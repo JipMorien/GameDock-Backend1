@@ -8,9 +8,9 @@ namespace Domain
 
         public Leaderboard(int leaderboardId, string name, int userId)
         {
-            leaderboardId = LeaderboardId;
-            name = Name;
-            userId = UserId;
+            LeaderboardId = leaderboardId;
+            Name = name;
+            UserId = userId;
         }
     
     }

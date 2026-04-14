@@ -27,9 +27,12 @@ namespace DAL.Repos
             return LeaderboardMapper.ToLeaderboardDto(entity);
         }
 
-        public LeaderboardDto ReadLeaderboard(int id)
+        public LeaderboardDto? ReadLeaderboard(int id)
         {
             var entity = _context.Leaderboards.Find(id);
+            
+            if (entity == null)
+                return null;
             
             return  LeaderboardMapper.ToLeaderboardDto(entity);
         }
@@ -64,7 +67,8 @@ namespace DAL.Repos
 
         public List<LeaderboardDto> GetAllLeaderboards()
         {
-            throw new NotImplementedException();
+            return _context.Leaderboards.Select(LeaderboardMapper.ToLeaderboardDto).ToList();
+            
         }
     }
 }

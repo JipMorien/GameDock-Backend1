@@ -17,16 +17,18 @@ namespace Shared.Mappers
                 dto.UserId);
         }
         
-        public static Post ToPostDto(Post post)
+        public static PostDto ToPostDto(Post post)
         {
             if (post == null) 
                 throw new ArgumentNullException(nameof(post));
 
-            return new Post(
-                post.PostId,
-                post.Content,
-                post.CreatedAt,
-                post.UserId);
+            return new PostDto
+            {
+                PostId = post.PostId,
+                Content = post.Content,
+                CreatedAt = post.CreatedAt,
+                UserId = post.UserId
+            };
         }
         
         

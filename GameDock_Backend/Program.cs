@@ -1,6 +1,5 @@
+using BLL;
 using DAL;
-using DAL.Repos;
-using DTO.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,11 +7,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddOpenApi();
 
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(
-        builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddScoped<IGameDockUserDAL, GameDockUserDAL>();
+builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// Register application layers
+builder.Services.AddDalServices();
+builder.Services.AddBllServices();
 builder.Services.AddControllers();
 
 var app = builder.Build();

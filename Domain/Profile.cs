@@ -9,9 +9,9 @@ namespace Domain
 
         public Profile(int profileId, string userName, int userId)
         {
-            profileId = ProfileId;
-            userName = UserName;
-            userId = UserId;
+            ProfileId = profileId;
+            UserName = userName;
+            UserId = userId;
         }
     }
     

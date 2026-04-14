@@ -12,12 +12,12 @@ namespace Domain
     
         public GameDockUser(bool isAdmin, int gameDockUserId, string userName, string  email, string passwordHash, DateTime  createdAt)
         {
-            isAdmin = IsAdmin;
-            gameDockUserId = GameDockUserId;
-            userName = UserName;
-            email = Email;
-            passwordHash = PasswordHash;
-            createdAt = CreatedAt;
+            IsAdmin = isAdmin;
+            GameDockUserId = gameDockUserId;
+            UserName = userName;
+            Email = email;
+            PasswordHash = passwordHash;
+            CreatedAt = createdAt;
         }
     }
 }

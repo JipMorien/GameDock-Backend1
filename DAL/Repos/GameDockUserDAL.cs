@@ -27,9 +27,12 @@ namespace DAL.Repos
             return GameDockUserMapper.ToUserDto(entity);
         }
 
-        public GameDockUserDto ReadUser(int id)
+        public GameDockUserDto? ReadUser(int id)
         {
             var entity = _context.GameDockUsers.Find(id);
+            
+            if (entity == null)
+                return null;
             
             return GameDockUserMapper.ToUserDto(entity);
         }
