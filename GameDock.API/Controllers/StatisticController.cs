@@ -1,4 +1,4 @@
-namespace GameDock_Backend.Controllers;
+namespace GameDock.API.Controllers;
 
 public class StatisticController
 {

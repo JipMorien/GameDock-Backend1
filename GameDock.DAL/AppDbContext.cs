@@ -1,8 +1,8 @@
-using Domain;
-using Domain.Statistics;
+using GameDock.Domain;
+using GameDock.Domain.Statistics;
 using Microsoft.EntityFrameworkCore;
 
-namespace DAL
+namespace GameDock.DAL
 {
     public class AppDbContext : DbContext
     {

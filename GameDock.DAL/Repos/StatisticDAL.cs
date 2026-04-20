@@ -1,8 +1,8 @@
-using Shared.Mappers;
-using DTO.Dtos;
-using DTO.Interfaces;
+using GameDock.DTO.Dtos;
+using GameDock.DTO.Interfaces;
+using GameDock.Shared.Mappers;
 
-namespace DAL.Repos
+namespace GameDock.DAL.Repos
 {
     public class StatisticDAL : IStatisticDAL
     {

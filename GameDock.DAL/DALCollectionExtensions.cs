@@ -1,8 +1,8 @@
-using DAL.Repos;
-using DTO.Interfaces;
+using GameDock.DAL.Repos;
+using GameDock.DTO.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DAL
+namespace GameDock.DAL
 {
     public static class DALCollectionExtensions
     {

@@ -1,7 +1,7 @@
-using Domain;
-using DTO.Dtos;
+using GameDock.Domain;
+using GameDock.DTO.Dtos;
 
-namespace Shared.Mappers
+namespace GameDock.Shared.Mappers
 {
     public static class ProfileMapper
     {

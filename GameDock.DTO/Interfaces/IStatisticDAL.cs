@@ -1,6 +1,6 @@
-using DTO.Dtos;
+using GameDock.DTO.Dtos;
 
-namespace DTO.Interfaces
+namespace GameDock.DTO.Interfaces
 {
     public interface IStatisticDAL
     {

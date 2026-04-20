@@ -1,7 +1,7 @@
-using BLL.Containers;
+using GameDock.BLL.Containers;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace BLL
+namespace GameDock.BLL
 {
     public static class BllServiceCollectionExtensions
     {

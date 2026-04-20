@@ -1,6 +1,6 @@
-using DTO.Dtos.Enums;
+using GameDock.DTO.Dtos.Enums;
 
-namespace DTO.Dtos
+namespace GameDock.DTO.Dtos
 {
     public class StatisticDto
     {

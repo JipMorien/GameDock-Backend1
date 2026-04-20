@@ -1,4 +1,4 @@
-namespace DTO.Dtos
+namespace GameDock.DTO.Dtos
 {
     public class GameDockUserDto
     {

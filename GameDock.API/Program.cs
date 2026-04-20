@@ -1,5 +1,6 @@
-using BLL;
 using DAL;
+using GameDock.BLL;
+using GameDock.DAL;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

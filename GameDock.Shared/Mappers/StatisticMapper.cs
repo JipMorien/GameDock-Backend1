@@ -1,8 +1,8 @@
-using Domain.Statistics;
-using DTO.Dtos;
-using DTO.Dtos.Enums;
+using GameDock.Domain.Statistics;
+using GameDock.DTO.Dtos;
+using GameDock.DTO.Dtos.Enums;
 
-namespace Shared.Mappers
+namespace GameDock.Shared.Mappers
 {
     public static class StatisticMapper
     {

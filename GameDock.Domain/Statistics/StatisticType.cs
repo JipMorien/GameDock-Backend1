@@ -1,4 +1,4 @@
-namespace Domain.Statistics
+namespace GameDock.Domain.Statistics
 {
     public enum StatisticType
     {

@@ -1,4 +1,4 @@
-namespace DTO.Dtos.Enums;
+namespace GameDock.DTO.Dtos.Enums;
 
     public enum StatisticTypeDto
     {

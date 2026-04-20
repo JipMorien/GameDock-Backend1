@@ -1,8 +1,8 @@
-using DTO.Interfaces;
-using Domain.Statistics;
-using Shared.Mappers;
+using GameDock.Domain.Statistics;
+using GameDock.DTO.Interfaces;
+using GameDock.Shared.Mappers;
 
-namespace BLL.Containers
+namespace GameDock.BLL.Containers
 {
     public class StatisticContainer
     {

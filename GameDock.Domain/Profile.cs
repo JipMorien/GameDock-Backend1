@@ -1,4 +1,4 @@
-namespace Domain
+namespace GameDock.Domain
 {
     public class Profile
     {
