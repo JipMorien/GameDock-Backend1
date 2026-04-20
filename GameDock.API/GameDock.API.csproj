@@ -5,6 +5,7 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <RootNamespace>GameDock_Backend</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -24,8 +25,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\BLL\BLL.csproj" />
-      <ProjectReference Include="..\DAL\DAL.csproj" />
+      <ProjectReference Include="..\GameDock.BLL\GameDock.BLL.csproj" />
+      <ProjectReference Include="..\GameDock.DAL\GameDock.DAL.csproj" />
     </ItemGroup>
 
 </Project>

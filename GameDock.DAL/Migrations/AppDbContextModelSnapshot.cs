@@ -3,7 +3,6 @@ using System;
 using DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -12,11 +11,9 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260413141215_InitialCreate")]
-    partial class InitialCreate
+    partial class AppDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,7 +22,7 @@ namespace DAL.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Domain.GameDockUser", b =>
+            modelBuilder.Entity("GameDock.Domain.GameDockUser", b =>
                 {
                     b.Property<int>("GameDockUserId")
                         .ValueGeneratedOnAdd()
@@ -56,7 +53,7 @@ namespace DAL.Migrations
                     b.ToTable("GameDockUsers");
                 });
 
-            modelBuilder.Entity("Domain.Leaderboard", b =>
+            modelBuilder.Entity("GameDock.Domain.Leaderboard", b =>
                 {
                     b.Property<int>("LeaderboardId")
                         .ValueGeneratedOnAdd()
@@ -76,7 +73,7 @@ namespace DAL.Migrations
                     b.ToTable("Leaderboards");
                 });
 
-            modelBuilder.Entity("Domain.Post", b =>
+            modelBuilder.Entity("GameDock.Domain.Post", b =>
                 {
                     b.Property<int>("PostId")
                         .ValueGeneratedOnAdd()
@@ -99,7 +96,7 @@ namespace DAL.Migrations
                     b.ToTable("Posts");
                 });
 
-            modelBuilder.Entity("Domain.Profile", b =>
+            modelBuilder.Entity("GameDock.Domain.Profile", b =>
                 {
                     b.Property<int>("ProfileId")
                         .ValueGeneratedOnAdd()
@@ -119,7 +116,7 @@ namespace DAL.Migrations
                     b.ToTable("Profiles");
                 });
 
-            modelBuilder.Entity("Domain.Statistics.Statistic", b =>
+            modelBuilder.Entity("GameDock.Domain.Statistics.Statistic", b =>
                 {
                     b.Property<int>("StatisticId")
                         .ValueGeneratedOnAdd()

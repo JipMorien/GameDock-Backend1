@@ -1,16 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameDock_Backend", "GameDock_Backend\GameDock_Backend.csproj", "{9A53D6C8-0426-42CF-875D-3CF35561E088}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameDock.API", "GameDock.API\GameDock.API.csproj", "{9A53D6C8-0426-42CF-875D-3CF35561E088}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{1584A577-164D-4E07-ACC3-2B59C454B6A1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameDock.Domain", "GameDock.Domain\GameDock.Domain.csproj", "{1584A577-164D-4E07-ACC3-2B59C454B6A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{D3CE569E-1986-42BB-AC90-F55B7090D802}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameDock.BLL", "GameDock.BLL\GameDock.BLL.csproj", "{D3CE569E-1986-42BB-AC90-F55B7090D802}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{89C49994-64FE-4050-AB0F-1E390D683104}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameDock.DAL", "GameDock.DAL\GameDock.DAL.csproj", "{89C49994-64FE-4050-AB0F-1E390D683104}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTO", "DTO\DTO.csproj", "{6651BBDF-8311-4F8F-8447-4A00E474C0BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameDock.DTO", "GameDock.DTO\GameDock.DTO.csproj", "{6651BBDF-8311-4F8F-8447-4A00E474C0BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{B85C7F5D-3100-4550-869A-8BAD99C7657E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameDock.Shared", "GameDock.Shared\GameDock.Shared.csproj", "{B85C7F5D-3100-4550-869A-8BAD99C7657E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

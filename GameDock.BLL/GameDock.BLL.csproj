@@ -4,7 +4,14 @@
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <RootNamespace>BLL</RootNamespace>
     </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\GameDock.DAL\GameDock.DAL.csproj" />
+      <ProjectReference Include="..\GameDock.DTO\GameDock.DTO.csproj" />
+      <ProjectReference Include="..\GameDock.Shared\GameDock.Shared.csproj" />
+    </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.10" />

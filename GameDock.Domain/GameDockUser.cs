@@ -9,7 +9,7 @@ namespace Domain
         public string PasswordHash {get; set;}
         public DateTime CreatedAt { get; set; }
     
-    
+        
         public GameDockUser(bool isAdmin, int gameDockUserId, string userName, string  email, string passwordHash, DateTime  createdAt)
         {
             IsAdmin = isAdmin;
