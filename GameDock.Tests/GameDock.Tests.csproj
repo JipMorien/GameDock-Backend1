@@ -3,16 +3,29 @@
     <PropertyGroup>
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
+        <IsTestProject>true</IsTestProject>
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Moq" Version="4.20.72" />
-      <PackageReference Include="xunit" Version="2.9.3" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.5.0" />
+        <PackageReference Include="Moq" Version="4.20.72" />
+        <PackageReference Include="xunit" Version="2.9.3" />
+        <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.10" />
     </ItemGroup>
 
     <ItemGroup>
       <Folder Include="IntregrationTests\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\GameDock.BLL\GameDock.BLL.csproj" />
+      <ProjectReference Include="..\GameDock.Domain\GameDock.Domain.csproj" />
+      <ProjectReference Include="..\GameDock.DTO\GameDock.DTO.csproj" />
     </ItemGroup>
 
 </Project>

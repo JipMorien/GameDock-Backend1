@@ -1,6 +1,6 @@
 namespace GameDock.Tests.UnitTests;
 
-public class LeaderboardContainerUnitTests
+public class ProfileUnitTests
 {
     
 }
