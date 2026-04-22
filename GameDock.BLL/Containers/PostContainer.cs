@@ -20,7 +20,8 @@ namespace GameDock.BLL.Containers
 
             if (post.PostId < 0)
                 throw new ArgumentException("Post ID cannot be less than 0");
-
+            if (post.Title == null)
+                throw new ArgumentException("Post Title cannot be null");
             if (string.IsNullOrWhiteSpace(post.Content))
                 throw new ArgumentException("Post content cannot be empty");
 

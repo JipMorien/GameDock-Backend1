@@ -1,5 +1,6 @@
 using GameDock.Domain;
 using GameDock.DTO.Dtos;
+using Microsoft.JSInterop.Infrastructure;
 
 namespace GameDock.Shared.Mappers
 {
@@ -12,6 +13,7 @@ namespace GameDock.Shared.Mappers
 
             return new Post(
                 dto.PostId,
+                dto.Title,
                 dto.Content,
                 dto.CreatedAt,
                 dto.UserId);
@@ -25,6 +27,7 @@ namespace GameDock.Shared.Mappers
             return new PostDto
             {
                 PostId = post.PostId,
+                Title = post.Title,
                 Content = post.Content,
                 CreatedAt = post.CreatedAt,
                 UserId = post.UserId

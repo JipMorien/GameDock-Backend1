@@ -24,6 +24,9 @@ namespace GameDock.BLL.Containers
             if (statistic.UserId < 0)
                 throw new ArgumentException("User ID cannot be less than 0");
 
+            if (!Enum.IsDefined(typeof(StatisticType), statistic.StatisticType))
+                throw new ArgumentException("StatisticType is invalid");
+
             if (statistic.Value < 0)
                 throw new ArgumentException("Statistic value cannot be less than 0");
 

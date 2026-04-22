@@ -46,6 +46,7 @@ namespace GameDock.DAL.Repos
                 throw new Exception($"Post {post.PostId} not found");
             
             existingEntity.Content = post.Content;
+            existingEntity.Title = post.Title;
             existingEntity.UserId = post.UserId;
             existingEntity.PostId = post.PostId;
             existingEntity.CreatedAt = post.CreatedAt;
