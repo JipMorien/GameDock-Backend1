@@ -1,5 +1,6 @@
 using GameDock.Domain;
 using GameDock.Domain.Statistics;
+using GameDock.Domain.FriendRequest;
 using Microsoft.EntityFrameworkCore;
 
 namespace GameDock.DAL
@@ -15,5 +16,6 @@ namespace GameDock.DAL
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<Statistic> Statistics { get; set; }
         public DbSet<Leaderboard> Leaderboards { get; set; }
+        public DbSet<FriendRequest> FriendRequests { get; set; }
     }
 }

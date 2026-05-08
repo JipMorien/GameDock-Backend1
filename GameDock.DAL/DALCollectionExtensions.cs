@@ -13,6 +13,7 @@ namespace GameDock.DAL
             services.AddScoped<IPostDAL, PostDAL>();
             services.AddScoped<ILeaderboardDAL, LeaderboardDAL>();
             services.AddScoped<IStatisticDAL, StatisticDAL>();
+            services.AddScoped<IFriendRequestDAL, FriendRequestDAL>();
 
             return services;
         }

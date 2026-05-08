@@ -24,8 +24,20 @@ namespace GameDock.BLL.Containers
             if (string.IsNullOrWhiteSpace(profile.UserName))
                 throw new ArgumentException("Username cannot be empty");
 
+            if (profile.UserName.Length > 20)
+                throw new ArgumentException("Username cannot be longer than 20 characters");
+
             if (profile.UserId < 0)
                 throw new ArgumentException("User ID cannot be less than 0");
+
+            if (profile.Bio.Length > 250)
+                throw new ArgumentException("Bio cannot be longer than 250 characters");
+
+            if (profile.AvatarId < 1 || profile.AvatarId > 5)
+                throw new ArgumentException("Avatar ID must be between 1 and 5");
+
+            if (profile.CreatedAt == default)
+                throw new ArgumentException("CreatedAt cannot be empty");
         }
 
         public Profile CreateProfile(Profile profile)
@@ -101,7 +113,6 @@ namespace GameDock.BLL.Containers
             if (userId <= 0)
                 throw new ArgumentException("Invalid user ID");
 
-            CheckProfile(updatedProfile);
 
             var existingProfileDto = _profileDAL.GetProfileByUserId(userId);
 

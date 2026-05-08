@@ -22,6 +22,31 @@ namespace DAL.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("GameDock.Domain.FriendRequest.FriendRequest", b =>
+                {
+                    b.Property<int>("FriendRequestId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("FriendRequestId"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("ReceiverUserId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("SenderUserId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
+                    b.HasKey("FriendRequestId");
+
+                    b.ToTable("FriendRequests");
+                });
+
             modelBuilder.Entity("GameDock.Domain.GameDockUser", b =>
                 {
                     b.Property<int>("GameDockUserId")

@@ -16,6 +16,7 @@ namespace GameDock.BLL
             services.AddScoped<AuthContainer>();
             services.AddScoped<JwtTokenService>();
             services.AddScoped<PasswordService>();
+            services.AddScoped<FriendRequestContainer>();
 
             return services;
         }
