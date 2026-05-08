@@ -9,6 +9,7 @@ namespace GameDock.DTO.Interfaces
         void UpdateProfile(ProfileDto profile);
         void DeleteProfile(int id);
         List<ProfileDto> GetAllProfiles();
+        ProfileDto? GetProfileByUserId(int id);
 
     }
 }

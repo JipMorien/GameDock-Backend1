@@ -1,6 +1,8 @@
+using GameDock.Domain;
 using GameDock.DTO.Dtos;
 using GameDock.DTO.Interfaces;
 using GameDock.BLL.Services;
+using GameDock.Shared.Mappers;
 using Microsoft.AspNetCore.Identity;
 
 namespace GameDock.BLL.Containers
@@ -8,17 +10,22 @@ namespace GameDock.BLL.Containers
     public class AuthContainer
     {
         private readonly IGameDockUserDAL _userDal;
+        private readonly IProfileDAL _profileDal;
         private readonly PasswordHasher<GameDockUserDto> _passwordHasher;
         private readonly JwtTokenService _jwtTokenService;
         
-        public AuthContainer(IGameDockUserDAL userDal, JwtTokenService jwtTokenService)
+        public AuthContainer(
+            IGameDockUserDAL userDal, 
+            IProfileDAL profileDal, 
+            JwtTokenService jwtTokenService)
         {
             _userDal = userDal;
+            _profileDal = profileDal;
             _jwtTokenService = jwtTokenService;
             _passwordHasher = new PasswordHasher<GameDockUserDto>();
         }
 
-        public AuthResponseDto Register(RegisterRequestDto request)
+        private void CheckAuth(RegisterRequestDto request)
         {
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
@@ -39,6 +46,11 @@ namespace GameDock.BLL.Containers
 
             if (existingUser != null)
                 throw new ArgumentException("A user with this email already exists");
+        }
+        
+        public AuthResponseDto Register(RegisterRequestDto request)
+        {
+            CheckAuth(request);
 
             var userDto = new GameDockUserDto
             {
@@ -52,13 +64,26 @@ namespace GameDock.BLL.Containers
 
             var createdUser = _userDal.CreateUser(userDto);
 
+            var profile = new Profile(
+                0,
+                createdUser.UserName,
+                createdUser.GameDockUserId,
+                string.Empty,
+                1,
+                DateTime.UtcNow
+            );
+
+            var profileDto = ProfileMapper.ToProfileDto(profile);
+            _profileDal.CreateProfile(profileDto);
+
             return new AuthResponseDto
             {
                 GameDockUserId = createdUser.GameDockUserId,
                 UserName = createdUser.UserName,
                 Email = createdUser.Email,
                 IsAdmin = createdUser.IsAdmin,
-                Token = _jwtTokenService.GenerateToken(createdUser)            };
+                Token = _jwtTokenService.GenerateToken(createdUser)
+            };
         }
 
         public AuthResponseDto Login(LoginRequestDto request)
@@ -92,7 +117,8 @@ namespace GameDock.BLL.Containers
                 UserName = user.UserName,
                 Email = user.Email,
                 IsAdmin = user.IsAdmin,
-                Token = _jwtTokenService.GenerateToken(user)            };
+                Token = _jwtTokenService.GenerateToken(user)
+            };
         }
     }
 }

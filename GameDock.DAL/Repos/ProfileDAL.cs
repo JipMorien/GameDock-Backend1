@@ -46,8 +46,9 @@ public class ProfileDAL : IProfileDAL
         if (existingEntity == null)
             throw new Exception($"Profile not found with ID {profile.ProfileId}");
 
-        existingEntity.UserId = profile.UserId;
         existingEntity.UserName = profile.UserName;
+        existingEntity.Bio = profile.Bio;
+        existingEntity.AvatarId = profile.AvatarId;
 
         _context.SaveChanges();
     }
@@ -65,5 +66,16 @@ public class ProfileDAL : IProfileDAL
     public List<ProfileDto> GetAllProfiles()
     {
         return _context.Profiles.Select(ProfileMapper.ToProfileDto).ToList();
+    }
+
+    public ProfileDto? GetProfileByUserId(int userId)
+    {
+        var entity = _context.Profiles
+            .FirstOrDefault(profile => profile.UserId == userId);
+
+        if (entity == null)
+            return null;
+
+        return ProfileMapper.ToProfileDto(entity);
     }
 }

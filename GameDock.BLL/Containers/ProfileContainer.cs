@@ -82,5 +82,18 @@ namespace GameDock.BLL.Containers
 
             return profileDtos.Select(ProfileMapper.FromProfileDto).ToList();
         }
+        
+        public Profile? GetProfileByUserId(int userId)
+        {
+            if (userId <= 0)
+                throw new ArgumentException("User ID must be greater than 0");
+
+            var profileDto = _profileDAL.GetProfileByUserId(userId);
+
+            if (profileDto == null)
+                return null;
+
+            return ProfileMapper.FromProfileDto(profileDto);
+        }
     }
 }

@@ -13,7 +13,10 @@ namespace GameDock.Shared.Mappers
             return new Profile(
                 dto.ProfileId,
                 dto.UserName,
-                dto.UserId);
+                dto.UserId,
+                dto.Bio,
+                dto.AvatarId,
+                dto.CreatedAt);
         }
         
         public static ProfileDto ToProfileDto(Profile profile)
@@ -25,7 +28,10 @@ namespace GameDock.Shared.Mappers
             {
                 ProfileId = profile.ProfileId,
                 UserName = profile.UserName,
-                UserId = profile.UserId
+                UserId = profile.UserId,
+                Bio = profile.Bio,
+                AvatarId = profile.AvatarId,
+                CreatedAt = profile.CreatedAt
             };
 
         }

@@ -3,6 +3,7 @@ using GameDock.Shared.Mappers;
 using GameDock.DTO.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace GameDock.API.Controllers;
 
@@ -27,7 +28,26 @@ public class ProfilesController : ControllerBase
         return Ok(profiles);
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("me")]
+    public ActionResult<ProfileDto> GetMyProfile()
+    {
+        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+        if (string.IsNullOrEmpty(userIdClaim))
+            return Unauthorized();
+
+        if (!int.TryParse(userIdClaim, out var userId))
+            return Unauthorized();
+
+        var profile = _container.GetProfileByUserId(userId);
+
+        if (profile == null)
+            return NotFound("Profile not found");
+
+        return Ok(ProfileMapper.ToProfileDto(profile));
+    }
+    
+    [HttpGet("{id:int}")]
     public ActionResult<ProfileDto> GetById(int id)
     {
         var profile = _container.ReadProfile(id);
@@ -81,4 +101,6 @@ public class ProfilesController : ControllerBase
         _container.DeleteProfile(id);
         return NoContent();
     }
-}
+
+
+ }
