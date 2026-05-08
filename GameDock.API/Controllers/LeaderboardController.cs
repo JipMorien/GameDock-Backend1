@@ -2,8 +2,10 @@ using GameDock.BLL.Containers;
 using GameDock.Shared.Mappers;
 using GameDock.DTO.Dtos;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GameDock.API.Controllers;
+
 
 [ApiController]
 [Route("api/leaderboards")]
@@ -35,7 +37,8 @@ public class LeaderboardsController : ControllerBase
 
         return Ok(LeaderboardMapper.ToLeaderboardDto(leaderboard));
     }
-
+    
+    [Authorize]
     [HttpPost]
     public ActionResult<LeaderboardDto> Create([FromBody] LeaderboardDto leaderboardDto)
     {
@@ -52,7 +55,8 @@ public class LeaderboardsController : ControllerBase
             return BadRequest(ex.Message);
         }
     }
-
+    
+    [Authorize]
     [HttpPut("{id}")]
     public IActionResult Update(int id, [FromBody] LeaderboardDto leaderboardDto)
     {
@@ -68,8 +72,8 @@ public class LeaderboardsController : ControllerBase
 
         return NoContent();
     }
-
-
+    
+    [Authorize]
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {

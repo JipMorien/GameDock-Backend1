@@ -9,6 +9,6 @@ namespace GameDock.DTO.Interfaces
         void UpdateUser(GameDockUserDto gameDockUser);
         void DeleteUser(int id);
         List<GameDockUserDto> GetAllUsers();
-
+        GameDockUserDto? GetUserByEmail(string email);
     }
 }

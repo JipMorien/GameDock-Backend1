@@ -1,4 +1,5 @@
 using GameDock.BLL.Containers;
+using GameDock.BLL.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GameDock.BLL
@@ -12,6 +13,9 @@ namespace GameDock.BLL
             services.AddScoped<PostContainer>();
             services.AddScoped<LeaderboardContainer>();
             services.AddScoped<StatisticContainer>();
+            services.AddScoped<AuthContainer>();
+            services.AddScoped<JwtTokenService>();
+            services.AddScoped<PasswordService>();
 
             return services;
         }

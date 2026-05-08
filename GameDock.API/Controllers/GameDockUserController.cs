@@ -2,9 +2,11 @@ using GameDock.BLL.Containers;
 using GameDock.Shared.Mappers;
 using GameDock.DTO.Dtos;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GameDock.API.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/users")]
 public class GameDockUsersController : ControllerBase

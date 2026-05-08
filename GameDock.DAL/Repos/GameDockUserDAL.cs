@@ -69,6 +69,16 @@ namespace GameDock.DAL.Repos
         {
             return _context.GameDockUsers.Select(GameDockUserMapper.ToUserDto).ToList();
         }
+
+        public GameDockUserDto? GetUserByEmail(string email)
+        {
+            var entity = _context.GameDockUsers.FirstOrDefault(u => u.Email == email);
+            
+            if (entity == null)
+                return null;
+            
+            return GameDockUserMapper.ToUserDto(entity);
+        }
     }
 }
 

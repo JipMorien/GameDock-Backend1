@@ -2,6 +2,7 @@ using GameDock.BLL.Containers;
 using GameDock.Shared.Mappers;
 using GameDock.DTO.Dtos;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GameDock.API.Controllers;
 
@@ -36,6 +37,7 @@ public class PostsController : ControllerBase
         return Ok(PostMapper.ToPostDto(post));
     }
 
+    [Authorize]
     [HttpPost]
     public ActionResult<PostDto> Create([FromBody] PostDto postDto)
     {
@@ -52,7 +54,8 @@ public class PostsController : ControllerBase
             return BadRequest(ex.Message);
         }
     }
-
+    
+    [Authorize]
     [HttpPut("{id}")]
     public IActionResult Update(int id, [FromBody] PostDto postDto)
     {
@@ -68,7 +71,8 @@ public class PostsController : ControllerBase
 
         return NoContent();
     }
-
+    
+    [Authorize]
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {

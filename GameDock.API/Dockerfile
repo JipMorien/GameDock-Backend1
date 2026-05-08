@@ -5,24 +5,21 @@ EXPOSE 8080
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
 
-COPY ["GameDock_Backend/GameDock_Backend.csproj", "GameDock_Backend/"]
-COPY ["BLL/BLL.csproj", "BLL/"]
-COPY ["DAL/DAL.csproj", "DAL/"]
-COPY ["Domain/Domain.csproj", "Domain/"]
-COPY ["DTO/DTO.csproj", "DTO/"]
+COPY ["GameDock.API/GameDock.API.csproj", "GameDock.API/"]
+COPY ["GameDock.BLL/GameDock.BLL.csproj", "GameDock.BLL/"]
+COPY ["GameDock.DAL/GameDock.DAL.csproj", "GameDock.DAL/"]
+COPY ["GameDock.Domain/GameDock.Domain.csproj", "GameDock.Domain/"]
+COPY ["GameDock.DTO/GameDock.DTO.csproj", "GameDock.DTO/"]
+COPY ["GameDock.Shared/GameDock.Shared.csproj", "GameDock.Shared/"]
 
-RUN dotnet restore "GameDock_Backend/GameDock_Backend.csproj"
+RUN dotnet restore "GameDock.API/GameDock.API.csproj"
 
 COPY . .
 
-WORKDIR "/src/GameDock_Backend"
-RUN dotnet build "GameDock_Backend.csproj" -c Release -o /app/build
-
-FROM build AS publish
-RUN dotnet publish "GameDock_Backend.csproj" -c Release -o /app/publish /p:UseAppHost=false
+WORKDIR "/src/GameDock.API"
+RUN dotnet publish "GameDock.API.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
-COPY --from=publish /app/publish .
-
-ENTRYPOINT ["dotnet", "GameDock_Backend.dll"]
+COPY --from=build /app/publish .
+ENTRYPOINT ["dotnet", "GameDock.API.dll"]
