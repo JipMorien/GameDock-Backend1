@@ -95,5 +95,28 @@ namespace GameDock.BLL.Containers
 
             return ProfileMapper.FromProfileDto(profileDto);
         }
+        
+        public void UpdateMyProfile(int userId, Profile updatedProfile)
+        {
+            if (userId <= 0)
+                throw new ArgumentException("Invalid user ID");
+
+            CheckProfile(updatedProfile);
+
+            var existingProfileDto = _profileDAL.GetProfileByUserId(userId);
+
+            if (existingProfileDto == null)
+                throw new ArgumentException("Profile could not be read");
+
+            var existingProfile = ProfileMapper.FromProfileDto(existingProfileDto);
+
+            existingProfile.UserName = updatedProfile.UserName;
+            existingProfile.Bio = updatedProfile.Bio;
+            existingProfile.AvatarId = updatedProfile.AvatarId;
+
+            CheckProfile(existingProfile);
+
+            _profileDAL.UpdateProfile(ProfileMapper.ToProfileDto(existingProfile));
+        }
     }
 }

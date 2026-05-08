@@ -1,4 +1,5 @@
 using GameDock.BLL.Containers;
+using GameDock.Domain;
 using GameDock.Shared.Mappers;
 using GameDock.DTO.Dtos;
 using Microsoft.AspNetCore.Mvc;
@@ -45,6 +46,36 @@ public class ProfilesController : ControllerBase
             return NotFound("Profile not found");
 
         return Ok(ProfileMapper.ToProfileDto(profile));
+    }
+    
+    [HttpPut("me")]
+    public IActionResult UpdateMyProfile([FromBody] UpdateProfileRequestDto request)
+    {
+        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+        if (string.IsNullOrEmpty(userIdClaim))
+            return Unauthorized();
+
+        if (!int.TryParse(userIdClaim, out var userId))
+            return Unauthorized();
+
+        try
+        {
+            var profile = new Profile
+            {
+                UserName = request.UserName,
+                Bio = request.Bio,
+                AvatarId = request.AvatarId
+            };
+
+            _container.UpdateMyProfile(userId, profile);
+
+            return NoContent();
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
     
     [HttpGet("{id:int}")]
