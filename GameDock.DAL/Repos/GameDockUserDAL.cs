@@ -79,6 +79,18 @@ namespace GameDock.DAL.Repos
             
             return GameDockUserMapper.ToUserDto(entity);
         }
+        
+        public GameDockUserDto? GetUserByUserName(string userName)
+        {
+            var normalizedUserName = userName.Trim().ToLower();
+
+            var user = _context.GameDockUsers
+                .FirstOrDefault(u => u.UserName.ToLower() == normalizedUserName);
+
+            return user == null ? null : GameDockUserMapper.ToUserDto(user);
+        }
+        
+
     }
 }
 

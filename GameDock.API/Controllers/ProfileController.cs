@@ -48,6 +48,17 @@ public class ProfilesController : ControllerBase
         return Ok(ProfileMapper.ToProfileDto(profile));
     }
     
+    [HttpGet("user/{userId:int}")]
+    public ActionResult<ProfileDto> GetByUserId(int userId)
+    {
+        var profile = _container.GetProfileByUserId(userId);
+
+        if (profile == null)
+            return NotFound();
+
+        return Ok(ProfileMapper.ToProfileDto(profile));
+    }
+    
     [HttpPut("me")]
     public IActionResult UpdateMyProfile([FromBody] UpdateProfileRequestDto request)
     {
@@ -132,6 +143,8 @@ public class ProfilesController : ControllerBase
         _container.DeleteProfile(id);
         return NoContent();
     }
+    
+    
 
 
  }

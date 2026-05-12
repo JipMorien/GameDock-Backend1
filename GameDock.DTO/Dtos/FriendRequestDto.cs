@@ -7,8 +7,10 @@ public class FriendRequestDto
     public int FriendRequestId { get; set; }
 
     public int SenderUserId { get; set; }
+    public string SenderUserName { get; set; } = string.Empty;
 
     public int ReceiverUserId { get; set; }
+    public string ReceiverUserName { get; set; } = string.Empty;
 
     public FriendRequestStatusDto Status { get; set; }
 

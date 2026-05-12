@@ -7,12 +7,15 @@ namespace GameDock.BLL.Containers;
 public class FriendRequestContainer
 {
     private readonly IFriendRequestDAL _friendRequestDAL;
+    private readonly IGameDockUserDAL _userDAL;
 
-    public FriendRequestContainer(IFriendRequestDAL friendRequestDAL)
+    public FriendRequestContainer(IFriendRequestDAL friendRequestDAL, IGameDockUserDAL userDAL)
     {
-        _friendRequestDAL = friendRequestDAL
-            ?? throw new ArgumentNullException(nameof(friendRequestDAL));
+        _friendRequestDAL = friendRequestDAL ?? throw new ArgumentNullException(nameof(friendRequestDAL));
+        _userDAL = userDAL ?? throw new ArgumentNullException(nameof(userDAL));
+
     }
+    
 
     private void CheckId(int id, string name)
     {
@@ -174,5 +177,20 @@ public class FriendRequestContainer
         return _friendRequestDAL.GetAcceptedFriends(userId)
             .Select(FriendRequestMapper.FromFriendRequestDto)
             .ToList();
+    }
+    
+    public FriendRequest CreateFriendRequestByUserName(int senderUserId, string receiverUserName)
+    {
+        CheckId(senderUserId, "Sender user ID");
+
+        if (string.IsNullOrWhiteSpace(receiverUserName))
+            throw new ArgumentException("Username cannot be empty");
+
+        var receiverUser = _userDAL.GetUserByUserName(receiverUserName);
+
+        if (receiverUser == null)
+            throw new ArgumentException("User with this username does not exist");
+
+        return CreateFriendRequest(senderUserId, receiverUser.GameDockUserId);
     }
 }

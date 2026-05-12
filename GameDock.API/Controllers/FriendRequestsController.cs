@@ -32,16 +32,19 @@ public class FriendRequestsController : ControllerBase
         return userId;
     }
 
-    [HttpPost("request/{receiverUserId:int}")]
-    public ActionResult<FriendRequestDto> SendFriendRequest(int receiverUserId)
+    [HttpPost("request")]
+    public ActionResult<FriendRequestDto> SendFriendRequest([FromBody] CreateFriendRequestDto dto)
     {
         try
         {
             var senderUserId = GetCurrentUserId();
 
-            var created = _container.CreateFriendRequest(senderUserId, receiverUserId);
+            var created = _container.CreateFriendRequestByUserName(
+                senderUserId,
+                dto.UserName
+            );
 
-            return Ok(FriendRequestMapper.ToFriendRequestDto(created));
+            return Ok(created);
         }
         catch (UnauthorizedAccessException ex)
         {
@@ -58,8 +61,7 @@ public class FriendRequestsController : ControllerBase
     {
         var userId = GetCurrentUserId();
 
-        var requests = _container.GetIncomingRequests(userId)
-            .Select(FriendRequestMapper.ToFriendRequestDto);
+        var requests = _container.GetIncomingRequests(userId);
 
         return Ok(requests);
     }
@@ -69,8 +71,7 @@ public class FriendRequestsController : ControllerBase
     {
         var userId = GetCurrentUserId();
 
-        var requests = _container.GetOutgoingRequests(userId)
-            .Select(FriendRequestMapper.ToFriendRequestDto);
+        var requests = _container.GetOutgoingRequests(userId);
 
         return Ok(requests);
     }
@@ -80,8 +81,7 @@ public class FriendRequestsController : ControllerBase
     {
         var userId = GetCurrentUserId();
 
-        var friends = _container.GetFriends(userId)
-            .Select(FriendRequestMapper.ToFriendRequestDto);
+        var friends = _container.GetFriends(userId);
 
         return Ok(friends);
     }

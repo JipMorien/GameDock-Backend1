@@ -2,6 +2,7 @@ using GameDock.Domain.FriendRequest;
 using GameDock.DTO.Dtos;
 using GameDock.DTO.Interfaces;
 using GameDock.Shared.Mappers;
+using Microsoft.EntityFrameworkCore;
 
 namespace GameDock.DAL.Repos;
 
@@ -24,17 +25,16 @@ public class FriendRequestDAL : IFriendRequestDAL
         _context.FriendRequests.Add(entity);
         _context.SaveChanges();
 
-        return FriendRequestMapper.ToFriendRequestDto(entity);
+        return ToDtoWithUserNames(entity);
     }
 
     public FriendRequestDto? ReadFriendRequest(int id)
     {
-        var entity = _context.FriendRequests.Find(id);
+        var entity = _context.FriendRequests
+            .AsNoTracking()
+            .FirstOrDefault(request => request.FriendRequestId == id);
 
-        if (entity == null)
-            return null;
-
-        return FriendRequestMapper.ToFriendRequestDto(entity);
+        return entity == null ? null : ToDtoWithUserNames(entity);
     }
 
     public void UpdateFriendRequest(FriendRequestDto friendRequest)
@@ -67,31 +67,74 @@ public class FriendRequestDAL : IFriendRequestDAL
 
     public List<FriendRequestDto> GetAllFriendRequests()
     {
-        return _context.FriendRequests.Select(FriendRequestMapper.ToFriendRequestDto).ToList();
+        return _context.FriendRequests
+            .AsNoTracking()
+            .ToList()
+            .Select(ToDtoWithUserNames)
+            .ToList();
     }
 
     public List<FriendRequestDto> GetFriendRequestsByReceiverId(int receiverUserId)
     {
-        return _context.FriendRequests.Where(request => request.ReceiverUserId == receiverUserId).Select(FriendRequestMapper.ToFriendRequestDto).ToList();
+        return _context.FriendRequests
+            .AsNoTracking()
+            .Where(request => request.ReceiverUserId == receiverUserId)
+            .ToList()
+            .Select(ToDtoWithUserNames)
+            .ToList();
     }
 
     public List<FriendRequestDto> GetFriendRequestsBySenderId(int senderUserId)
     {
-        return _context.FriendRequests.Where(request => request.SenderUserId == senderUserId).Select(FriendRequestMapper.ToFriendRequestDto).ToList();
+        return _context.FriendRequests
+            .AsNoTracking()
+            .Where(request => request.SenderUserId == senderUserId)
+            .ToList()
+            .Select(ToDtoWithUserNames)
+            .ToList();
     }
 
     public List<FriendRequestDto> GetAcceptedFriends(int userId)
     {
-        return _context.FriendRequests.Where(request => request.Status == FriendRequestStatus.Accepted && (request.SenderUserId == userId || request.ReceiverUserId == userId)).Select(FriendRequestMapper.ToFriendRequestDto).ToList();
+        return _context.FriendRequests
+            .AsNoTracking()
+            .Where(request =>
+                request.Status == FriendRequestStatus.Accepted &&
+                (request.SenderUserId == userId || request.ReceiverUserId == userId))
+            .ToList()
+            .Select(ToDtoWithUserNames)
+            .ToList();
     }
 
     public FriendRequestDto? GetFriendRequestBetweenUsers(int senderUserId, int receiverUserId)
     {
-        var entity = _context.FriendRequests.FirstOrDefault(request => (request.SenderUserId == senderUserId && request.ReceiverUserId == receiverUserId) || (request.SenderUserId == receiverUserId && request.ReceiverUserId == senderUserId));
+        var entity = _context.FriendRequests
+            .AsNoTracking()
+            .FirstOrDefault(request =>
+                (request.SenderUserId == senderUserId && request.ReceiverUserId == receiverUserId) ||
+                (request.SenderUserId == receiverUserId && request.ReceiverUserId == senderUserId));
 
-        if (entity == null)
-            return null;
+        return entity == null ? null : ToDtoWithUserNames(entity);
+    }
 
-        return FriendRequestMapper.ToFriendRequestDto(entity);
+    private FriendRequestDto ToDtoWithUserNames(FriendRequest request)
+    {
+        var senderUserName = _context.GameDockUsers
+            .AsNoTracking()
+            .Where(user => user.GameDockUserId == request.SenderUserId)
+            .Select(user => user.UserName)
+            .FirstOrDefault() ?? string.Empty;
+
+        var receiverUserName = _context.GameDockUsers
+            .AsNoTracking()
+            .Where(user => user.GameDockUserId == request.ReceiverUserId)
+            .Select(user => user.UserName)
+            .FirstOrDefault() ?? string.Empty;
+
+        return FriendRequestMapper.ToFriendRequestDto(
+            request,
+            senderUserName,
+            receiverUserName
+        );
     }
 }
