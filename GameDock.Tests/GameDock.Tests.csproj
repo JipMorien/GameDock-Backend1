@@ -8,6 +8,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="9.0.10" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.10" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.5.0" />
         <PackageReference Include="Moq" Version="4.20.72" />
         <PackageReference Include="xunit" Version="2.9.3" />
@@ -19,13 +21,10 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="IntregrationTests\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\GameDock.BLL\GameDock.BLL.csproj" />
       <ProjectReference Include="..\GameDock.Domain\GameDock.Domain.csproj" />
       <ProjectReference Include="..\GameDock.DTO\GameDock.DTO.csproj" />
+      <ProjectReference Include="..\GameDock.API\GameDock.API.csproj" />
     </ItemGroup>
 
 </Project>

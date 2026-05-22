@@ -22,18 +22,30 @@ namespace GameDock.Tests.UnitTests
         private static Profile BuildValidProfile(
             int profileId = 1,
             string userName = "Jip",
-            int userId = 1)
+            int userId = 1,
+            string bio = "Test bio",
+            int level = 1,
+            DateTime? createdAt = null)
         {
-            return new Profile(profileId, userName, userId);
+            return new Profile(
+                profileId,
+                userName,
+                userId,
+                bio,
+                level,
+                createdAt ?? DateTime.UtcNow);
         }
 
         private static ProfileDto BuildValidProfileDto(
             int profileId = 1,
             string userName = "Jip",
-            int userId = 1)
+            int userId = 1,
+            string bio = "Test bio",
+            int level = 1,
+            DateTime? createdAt = null)
         {
             return ProfileMapper.ToProfileDto(
-                BuildValidProfile(profileId, userName, userId));
+                BuildValidProfile(profileId, userName, userId, bio, level, createdAt));
         }
 
         [Fact]
