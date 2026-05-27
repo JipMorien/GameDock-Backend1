@@ -23,7 +23,7 @@ builder.Services.AddCors(options =>
     {
         policy.WithOrigins(
                 "http://localhost:3000",
-                "http://10.1.51.129:3000"
+                "https://gamedoc.tech"
             )
             .AllowAnyHeader()
             .AllowAnyMethod();
