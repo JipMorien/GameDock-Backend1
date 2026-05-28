@@ -43,7 +43,7 @@ jobs:
           dotnet-sonarscanner begin \
             /k:"gamedock-backend" \
             /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}" \
-            /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+            /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
 
       - name: Restore dependencies
         run: dotnet restore GameDock.API/GameDock.API.csproj
@@ -57,4 +57,4 @@ jobs:
       - name: End SonarQube analysis
         run: |
           dotnet-sonarscanner end \
-            /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+            /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
