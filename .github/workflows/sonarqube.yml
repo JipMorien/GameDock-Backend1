@@ -1,10 +1,10 @@
-  ```yml
   name: SonarQube Backend Analysis
   
   on:
     push:
       branches:
         - master
+    
     pull_request:
       branches:
         - master
@@ -25,23 +25,28 @@
           with:
             dotnet-version: 9.0.x
 
+        - name: Install Java
+          uses: actions/setup-java@v4
+          with:
+            distribution: temurin
+            java-version: 17
+
         - name: Install SonarScanner
-          run: |
-            dotnet tool install --global dotnet-sonarscanner
+          run: dotnet tool install --global dotnet-sonarscanner
 
-        - name: Add dotnet tools to PATH
+        - name: Add .NET tools to PATH
           run: echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
-
-        - name: Restore dependencies
-          run: dotnet restore
-          working-directory: ./GameDock.API
 
         - name: Begin SonarQube analysis
           run: |
             dotnet-sonarscanner begin \
-            /k:"gamedock-backend" \
-            /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}" \
-            /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+              /k:"gamedock-backend" \
+              /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}" \
+              /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+
+        - name: Restore dependencies
+          run: dotnet restore
+          working-directory: ./GameDock.API
 
         - name: Build project
           run: dotnet build --no-restore
@@ -54,5 +59,4 @@
         - name: End SonarQube analysis
           run: |
             dotnet-sonarscanner end \
-            /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
-    ```
+              /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
