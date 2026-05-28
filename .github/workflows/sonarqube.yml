@@ -1,63 +1,62 @@
 name: SonarQube Backend Analysis
 
 on:
-push:
-branches:
-  - master
-
-pull_request:
-branches:
-  - master
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 
 jobs:
-sonarqube:
-name: SonarQube
-runs-on: self-hosted
+  sonarqube:
+    name: SonarQube
+    runs-on: self-hosted
 
-steps:
-  - name: Checkout repository
-    uses: actions/checkout@v4
-    with:
-      fetch-depth: 0
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-  - name: Configure .NET environment
-    run: |
-      echo "DOTNET_ROOT=/home/ubuntu/.dotnet" >> $GITHUB_ENV
-      echo "/home/ubuntu/.dotnet" >> $GITHUB_PATH
-      echo "/home/ubuntu/.dotnet/tools" >> $GITHUB_PATH
+      - name: Configure .NET environment
+        run: |
+          echo "DOTNET_ROOT=/home/ubuntu/.dotnet" >> $GITHUB_ENV
+          echo "/home/ubuntu/.dotnet" >> $GITHUB_PATH
+          echo "/home/ubuntu/.dotnet/tools" >> $GITHUB_PATH
 
-  - name: Check .NET version
-    run: dotnet --version
+      - name: Check .NET version
+        run: dotnet --version
 
-  - name: Install Java
-    uses: actions/setup-java@v4
-    with:
-      distribution: temurin
-      java-version: 17
+      - name: Install Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
 
-  - name: Install or update SonarScanner
-    run: dotnet tool update --global dotnet-sonarscanner
+      - name: Install or update SonarScanner
+        run: dotnet tool update --global dotnet-sonarscanner
 
-  - name: Begin SonarQube analysis
-    run: |
-      dotnet-sonarscanner begin \
-        /k:"gamedock-backend" \
-        /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}" \
-        /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+      - name: Begin SonarQube analysis
+        run: |
+          dotnet-sonarscanner begin \
+            /k:"gamedock-backend" \
+            /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}" \
+            /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
 
-  - name: Restore dependencies
-    run: dotnet restore
-    working-directory: ./GameDock.API
+      - name: Restore dependencies
+        run: dotnet restore
+        working-directory: ./GameDock.API
 
-  - name: Build project
-    run: dotnet build --no-restore
-    working-directory: ./GameDock.API
+      - name: Build project
+        run: dotnet build --no-restore
+        working-directory: ./GameDock.API
 
-  - name: Run tests
-    run: dotnet test
-    working-directory: ./GameDock.Tests
+      - name: Run tests
+        run: dotnet test
+        working-directory: ./GameDock.Tests
 
-  - name: End SonarQube analysis
-    run: |
-      dotnet-sonarscanner end \
-        /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+      - name: End SonarQube analysis
+        run: |
+          dotnet-sonarscanner end \
+            /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
