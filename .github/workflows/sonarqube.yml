@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+
   pull_request:
     branches:
       - master
@@ -45,16 +46,13 @@ jobs:
             /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
 
       - name: Restore dependencies
-        run: dotnet restore
-        working-directory: ./GameDock.API
+        run: dotnet restore GameDock.API/GameDock.API.csproj
 
       - name: Build project
-        run: dotnet build --no-restore
-        working-directory: ./GameDock.API
+        run: dotnet build GameDock.API/GameDock.API.csproj --no-restore
 
       - name: Run tests
-        run: dotnet test
-        working-directory: ./GameDock.Tests
+        run: dotnet test GameDock.Tests/GameDock.Tests.csproj
 
       - name: End SonarQube analysis
         run: |
