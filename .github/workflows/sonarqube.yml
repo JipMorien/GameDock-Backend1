@@ -1,0 +1,58 @@
+  ```yml
+  name: SonarQube Backend Analysis
+  
+  on:
+    push:
+      branches:
+        - master
+    pull_request:
+      branches:
+        - master
+  
+  jobs:
+    sonarqube:
+      name: SonarQube
+      runs-on: self-hosted
+      
+      steps:
+        - name: Checkout repository
+          uses: actions/checkout@v4
+          with:
+            fetch-depth: 0
+
+        - name: Setup .NET
+          uses: actions/setup-dotnet@v4
+          with:
+            dotnet-version: 9.0.x
+
+        - name: Install SonarScanner
+          run: |
+            dotnet tool install --global dotnet-sonarscanner
+
+        - name: Add dotnet tools to PATH
+          run: echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
+
+        - name: Restore dependencies
+          run: dotnet restore
+          working-directory: ./GameDock.API
+
+        - name: Begin SonarQube analysis
+          run: |
+            dotnet-sonarscanner begin \
+            /k:"gamedock-backend" \
+            /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}" \
+            /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+
+        - name: Build project
+          run: dotnet build --no-restore
+          working-directory: ./GameDock.API
+
+        - name: Run tests
+          run: dotnet test --no-build
+          working-directory: ./GameDock.Tests
+
+        - name: End SonarQube analysis
+          run: |
+            dotnet-sonarscanner end \
+            /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+    ```
