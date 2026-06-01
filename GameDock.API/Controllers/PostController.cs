@@ -1,8 +1,10 @@
 using GameDock.BLL.Containers;
 using GameDock.Shared.Mappers;
 using GameDock.DTO.Dtos;
+using GameDock.API.Hubs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.SignalR;
 
 namespace GameDock.API.Controllers;
 
@@ -11,10 +13,12 @@ namespace GameDock.API.Controllers;
 public class PostsController : ControllerBase
 {
     private readonly PostContainer _container;
+    private readonly IHubContext<ForumHub> _forumHub;
 
-    public PostsController(PostContainer container)
+    public PostsController(PostContainer container, IHubContext<ForumHub> forumHub)
     {
         _container = container;
+        _forumHub = forumHub;
     }
 
     [HttpGet]
@@ -39,13 +43,15 @@ public class PostsController : ControllerBase
 
     [Authorize]
     [HttpPost]
-    public ActionResult<PostDto> Create([FromBody] PostDto postDto)
+    public async Task<ActionResult<PostDto>> Create([FromBody] PostDto postDto)
     {
         try
         {
             var post = PostMapper.FromPostDto(postDto);
             var created = _container.CreatePost(post);
             var createdDto = PostMapper.ToPostDto(created);
+
+            await _forumHub.Clients.All.SendAsync("PostCreated", createdDto);
 
             return CreatedAtAction(nameof(GetById), new { id = createdDto.PostId }, createdDto);
         }
