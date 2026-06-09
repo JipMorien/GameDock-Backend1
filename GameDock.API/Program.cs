@@ -1,30 +1,32 @@
 using System.Text;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
+using GameDock.API.Hubs;
 using GameDock.BLL;
 using GameDock.DAL;
-using GameDock.API.Hubs;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddOpenApi();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Register application layers
 builder.Services.AddDalServices();
 builder.Services.AddBllServices();
+
 builder.Services.AddSignalR();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("FrontendPolicy", policy =>
     {
-        policy.WithOrigins(
+        policy
+            .WithOrigins(
                 "http://localhost:3000",
-                "https://gamedoc.tech"
+                "https://gamedoc.tech",
+                "https://www.gamedoc.tech"
             )
             .AllowAnyHeader()
             .AllowAnyMethod()
@@ -73,6 +75,8 @@ if (app.Environment.IsDevelopment())
 
 // app.UseHttpsRedirection();
 
+app.UseRouting();
+
 app.UseCors("FrontendPolicy");
 
 app.UseAuthentication();
@@ -85,5 +89,4 @@ app.Run();
 
 public partial class Program
 {
-    
 }
